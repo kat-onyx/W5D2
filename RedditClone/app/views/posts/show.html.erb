@@ -1,2 +1,28 @@
-<h1>Posts#show</h1>
+<h1><%= @post.title %></h1>
+<div class="content" style="border: 1px solid black; margin: 10px; padding: 8px;">
+  <p>Content:</p>
+  <p><%= @post.content %></p>
+</div>
+
+<button type="button" name="upvote">Upvote</button>
+<button type="button" name="downvote">Downvote</button>
+
+<form action="<%= post_url(@post) %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Post" style="background-color: red">
+</form>
+
+<h3>Subs</h3>
+  <ul>
+    <% @post.subs.each do |sub| %>
+      <li><a href="<%= sub_url(sub) %>"><%= sub.title %></a></li>
+    <% end %>
+  </ul>
+
+<h2>Comments</h2>
+
+
+
+
 <p>Find me in app/views/posts/show.html.erb</p>
