@@ -1,2 +1,26 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<h1>Create New Post</h1>
+<form action="<%= posts_url(@post) %>" method="post">
+  <%= auth_token %>
+
+  <label>Title:
+    <input type="text" name="post[title]" >
+  </label>
+<br>
+  <label>URL:
+    <input type="text" name="post[url]" >
+  </label>
+<br>
+  <label>Content:
+    <textarea name="post[content]" rows="8" cols="40"></textarea>
+  </label>
+
+<h2>Associated Subs</h2>
+<ul>
+<% @subs.each do |sub| %>
+  <li><input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>">
+  <%= sub.title %></li>
+  <br>
+<% end %>
+</ul>
+  <input type="submit" value="Create Post">
+</form>

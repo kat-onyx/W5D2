@@ -1,2 +1,27 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<h1>Edit Post</h1>
+<form action="<%= posts_url(@post) %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="PATCH">
+
+  <label>Title:
+    <input type="text" name="post[title]" value="<%= @post.title %>">
+  </label>
+<br>
+  <label>URL:
+    <input type="text" name="post[url]" value="<%= @post.url %>">
+  </label>
+<br>
+  <label>Content:
+    <textarea name="post[content]" rows="8" cols="40"><%= @post.content %></textarea>
+  </label>
+
+<h2>Associated Subs</h2>
+<ul>
+<% @subs.each do |sub| %>
+  <li><input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>" checked>
+  <%= sub.title %></li>
+  <br>
+<% end %>
+</ul>
+  <input type="submit" value="Update Post">
+</form>
