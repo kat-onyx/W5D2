@@ -7,19 +7,13 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
 
-    if @user
+    if @user.save
       session[:session_token] = @user.session_token
-      redirect_to subs_url
+      redirect_to new_user_url
     else
       flash[:errors] = @user.errors.full_messages
       render :new
     end
-  end
-
-  def update
-  end
-
-  def edit
   end
 
   private
