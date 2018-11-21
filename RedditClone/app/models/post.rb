@@ -16,7 +16,7 @@ class Post < ApplicationRecord
   validates :subs, presence: { message: 'Must have at least one sub'}
 
   def top_level_comments
-    comments.where(:parent_comment_id => nil)
+    comments.where(:parent_comment_id => nil).includes(:author).includes(:child_comments)
   end
 
   belongs_to :author,

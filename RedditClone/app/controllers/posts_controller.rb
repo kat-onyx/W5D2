@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 
     result = "<ul>".html_safe
       parent_comment.each do |parent|
-        result += "<a href=\"#{comment_url(parent)}\"<li>#{parent.content}</a></li>".html_safe
+        result += "<li><a href=\"#{comment_url(parent)}\">#{parent.content}</a></li>".html_safe
         result += list_all_children(parent.child_comments)
       end
     result += "</ul>".html_safe
