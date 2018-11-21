@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  helper_method :list_all_children
   def new
     @subs = Sub.all
     @post = Post.new
@@ -38,6 +39,17 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     @post.destroy
     redirect_to subs_url
+  end
+
+  def list_all_children(parent_comment)
+    return "" if parent_comment.empty?
+
+    result = "<ul>".html_safe
+      parent_comment.each do |parent|
+        result += "<a href=\"#{comment_url(parent)}\"<li>#{parent.content}</a></li>".html_safe
+        result += list_all_children(parent.child_comments)
+      end
+    result += "</ul>".html_safe
   end
 
   def post_params

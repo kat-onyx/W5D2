@@ -21,8 +21,7 @@
   </ul>
 
 <h2>Comments</h2>
-
-
-
+<a href="<%= new_post_comment_url(@post.id) %>">Add Comment</a>
+<%= list_all_children(@post.top_level_comments) %>
 
 <p>Find me in app/views/posts/show.html.erb</p>
